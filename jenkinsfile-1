@@ -1,0 +1,20 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Check Docker Installation') {
+            steps {
+                sh 'docker version'
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Docker is installed'
+        }
+        failure {
+            echo 'Docker is not installed'
+        }
+    }
+}
