@@ -1,20 +1,19 @@
 pipeline {
     agent any
-
     stages {
-        stage('Check Docker Installation') {
-            steps {
-                sh 'docker version'
+        stage('Build') {
+            agent {
+                docker {
+                    image 'gradle:8.2.0-jdk17-alpine'
+                    // Run the container on the node specified at the
+                    // top-level of the Pipeline, in the same workspace,
+                    // rather than on a new node entirely:
+                    reuseNode true
+                }
             }
-        }
-    }
-
-    post {
-        success {
-            echo 'Docker is installed'
-        }
-        failure {
-            echo 'Docker is not installed'
+            steps {
+                sh 'gradle --version'
+            }
         }
     }
 }
