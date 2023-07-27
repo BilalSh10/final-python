@@ -6,9 +6,9 @@ pipeline {
             git branch: 'main', url: 'https://github.com/BilalSh10/final-python'
           }
         }
-        stage('Build Image') {
+        stage('build image') {
             steps {
-                sh 'docker build -t flaskAppImage:latest .'
+                sh 'docker build -t flask_app_image:latest .'
             }
         }
       }
