@@ -1,9 +1,9 @@
 pipeline {
     agent any
       stages {
-        stage('log version info') {
+        stage('git checkout') {
           steps {
-            sh 'docker --version'
+            git branch: 'main', url: 'https://github.com/BilalSh10/final-python'
           }
         }
       }
