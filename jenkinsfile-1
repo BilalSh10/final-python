@@ -8,17 +8,22 @@ pipeline {
         }
         stage('build image') {
           steps {
-                git branch: 'main', url: 'https://github.com/BilalSh10/final-python'
+            sh 'docker build -t flaskapp .'
           }
         }
         stage('run & test container'){
             steps {
-                git branch: 'main', url: 'https://github.com/BilalSh10/final-python'
+                sh 'docker run --name flaskapp -d -p 5001:5000 flaskapp:latest'
+                sleep 6
+                sh 'curl localhost:5001/api/doc'
+                sh 'docker stop flaskapp && docker rm flaskapp'
             }
         }
         stage('push to dockerhub') {
               steps {
-                   git branch: 'main', url: 'https://github.com/BilalSh10/final-python'
+                sh 'docker tag flaskapp:latest bilalsh10/myflaskapp:latest'
+                sh 'docker login -u $user -p $pass'
+                sh 'docker push bilalsh10/myflaskapp:latest'
               }
         }
       }
