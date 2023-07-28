@@ -1,10 +1,5 @@
 pipeline {
     agent any
-    environment {
-        dockerImage = ''
-        registry = 'bilalsh10/flask .'
-        registryCredential = '7d03b8e4-0e34-4bbd-82e8-93af218fea73'
-    }
       stages {
         stage('git checkout') {
           steps {
@@ -12,11 +7,9 @@ pipeline {
           }
         }
         stage('build image') {
-            steps {
-                script{
-                    docker.build("""bilalsh10/flask""")   
-                }
-            }
+          steps {
+            sh 'docker build -t flaskapp:$BUILD_ID .'
+          }
         }
       }
 }
