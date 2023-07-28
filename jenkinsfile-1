@@ -8,17 +8,17 @@ pipeline {
         }
         stage('build image') {
           steps {
-                sh 'docker -version'
+                git branch: 'main', url: 'https://github.com/BilalSh10/final-python'
           }
         }
         stage('run & test container'){
             steps {
-                sh 'docker -version'
+                git branch: 'main', url: 'https://github.com/BilalSh10/final-python'
             }
         }
         stage('push to dockerhub') {
               steps {
-                   sh 'docker -version'
+                   git branch: 'main', url: 'https://github.com/BilalSh10/final-python'
               }
         }
       }
